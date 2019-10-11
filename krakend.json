@@ -31,15 +31,30 @@
       "backend": [
         {
           "url_pattern": "/3/movie/popular",
-          {{ include "flatmap_remove_fields.tpl" }}
+          "extra_config": {
+            {{ include "flatmap_remove_fields.tpl" }}
+            { "type": "move", "args": [ "results", "now_playing" ]}
+          ]
+        }
+        }
         },
         {
           "url_pattern": "/3/movie/now_playing",
-          {{ include "flatmap_remove_fields.tpl" }}
+          	"github.com/devopsfaith/krakend/proxy": {
+              {{ include "flatmap_remove_fields.tpl" }}
+              { "type": "move", "args": [ "results", "now_playing" ]}
+          ]
+        }
+        }
         },
         {
           "url_pattern": "/3/movie/top_rated",
-          {{ include "flatmap_remove_fields.tpl" }}
+          	  "flatmap_filter": [
+                {{ include "flatmap_remove_fields.tpl" }}
+                { "type": "move", "args": [ "results", "now_playing" ]}
+          ]
+        }
+        }
         }
       ]
     }

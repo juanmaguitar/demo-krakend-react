@@ -1,6 +1,4 @@
-"extra_config": {
-	"github.com/devopsfaith/krakend/proxy": {
-	  "flatmap_filter": [
+
 		{ "type": "del", "args": [ "results.*.adult" ]},
 		{ "type": "del", "args": [ "results.*.backdrop_path" ]},
 		{ "type": "del", "args": [ "results.*.genre_ids" ]},
@@ -19,7 +17,3 @@
 		{ "type": "del", "args": [ "total_results" ]},
 		{ "type": "del", "args": [ "dates" ]},
 
-		{ "type": "move", "args": [ "results", "now_playing" ]}
-	  ]
-	}
-  }
