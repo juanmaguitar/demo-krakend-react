@@ -32,29 +32,35 @@
         {
           "url_pattern": "/3/movie/popular",
           "extra_config": {
-            {{ include "flatmap_remove_fields.tpl" }}
-            { "type": "move", "args": [ "results", "now_playing" ]}
-          ]
-        }
-        }
+            "github.com/devopsfaith/krakend/proxy": {
+              "flatmap_filter" : [
+                  {{ include "flatmap_remove_fields.tpl" }}
+                  { "type": "move", "args": [ "results", "popular" ]}
+              ]
+            }
+          }
         },
         {
           "url_pattern": "/3/movie/now_playing",
-          	"github.com/devopsfaith/krakend/proxy": {
-              {{ include "flatmap_remove_fields.tpl" }}
-              { "type": "move", "args": [ "results", "now_playing" ]}
-          ]
-        }
-        }
+          "extra_config": {
+            "github.com/devopsfaith/krakend/proxy": {
+              "flatmap_filter" : [
+                  {{ include "flatmap_remove_fields.tpl" }}
+                  { "type": "move", "args": [ "results", "now_playing" ]}
+              ]
+            }
+          }
         },
         {
           "url_pattern": "/3/movie/top_rated",
-          	  "flatmap_filter": [
-                {{ include "flatmap_remove_fields.tpl" }}
-                { "type": "move", "args": [ "results", "now_playing" ]}
-          ]
-        }
-        }
+          "extra_config": {
+            "github.com/devopsfaith/krakend/proxy": {
+              "flatmap_filter" : [
+                  {{ include "flatmap_remove_fields.tpl" }}
+                  { "type": "move", "args": [ "results", "top_rated" ]}
+              ]
+            }
+          }
         }
       ]
     }
