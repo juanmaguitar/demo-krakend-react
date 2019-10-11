@@ -1,5 +1,14 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Start krakend
+Run in the terminal:
+
+	FC_ENABLE=1\
+	FC_PARTIALS="$PWD" \
+	FC_OUT=out.json \
+	krakend run -d -c krakend.json
+
+
 ## Available Scripts
 
 In the project directory, you can run:
