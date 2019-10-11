@@ -3,6 +3,22 @@
   "timeout": "3000ms",
   "cache_ttl": "300s",
   "output_encoding": "json",
+  "extra_config": {
+    "github_com/devopsfaith/krakend-cors": {
+      "allow_origins": [
+        "*"
+      ],
+      "expose_headers": [
+        "Content-Length"
+      ],
+      "max_age": "12h",
+      "allow_methods": [
+        "GET",
+        "HEAD",
+        "POST"
+      ]
+    }
+  },
   "host": [
     "https://api.themoviedb.org"
   ],
@@ -15,86 +31,15 @@
       "backend": [
         {
           "url_pattern": "/3/movie/popular",
-          "extra_config": {
-            "github.com/devopsfaith/krakend/proxy": {
-              "flatmap_filter": [
-                { "type": "del", "args": [ "results.*.adult" ]},
-                { "type": "del", "args": [ "results.*.backdrop_path" ]},
-                { "type": "del", "args": [ "results.*.genre_ids" ]},
-                { "type": "del", "args": [ "results.*.original_language" ]},
-                { "type": "del", "args": [ "results.*.original_title" ]},
-                { "type": "del", "args": [ "results.*.overview" ]},
-                { "type": "del", "args": [ "results.*.popularity" ]},
-                { "type": "del", "args": [ "results.*.poster_path" ]},
-                { "type": "del", "args": [ "results.*.release_date" ]},
-                { "type": "del", "args": [ "results.*.video" ]},
-                { "type": "del", "args": [ "results.*.vote_average" ]},
-                { "type": "del", "args": [ "results.*.vote_count" ]},
-
-                { "type": "del", "args": [ "page" ]},
-                { "type": "del", "args": [ "total_pages" ]},
-                { "type": "del", "args": [ "total_results" ]},
-
-                { "type": "move", "args": [ "results", "popular" ]}
-              ]
-            }
-          }
+          {{ include "flatmap_remove_fields.tpl" }}
         },
         {
           "url_pattern": "/3/movie/now_playing",
-          "extra_config": {
-            "github.com/devopsfaith/krakend/proxy": {
-              "flatmap_filter": [
-                { "type": "del", "args": [ "results.*.adult" ]},
-                { "type": "del", "args": [ "results.*.backdrop_path" ]},
-                { "type": "del", "args": [ "results.*.genre_ids" ]},
-                { "type": "del", "args": [ "results.*.original_language" ]},
-                { "type": "del", "args": [ "results.*.original_title" ]},
-                { "type": "del", "args": [ "results.*.overview" ]},
-                { "type": "del", "args": [ "results.*.popularity" ]},
-                { "type": "del", "args": [ "results.*.poster_path" ]},
-                { "type": "del", "args": [ "results.*.release_date" ]},
-                { "type": "del", "args": [ "results.*.video" ]},
-                { "type": "del", "args": [ "results.*.vote_average" ]},
-                { "type": "del", "args": [ "results.*.vote_count" ]},
-
-                { "type": "del", "args": [ "page" ]},
-                { "type": "del", "args": [ "total_pages" ]},
-                { "type": "del", "args": [ "total_results" ]},
-                { "type": "del", "args": [ "dates" ]},
-
-                { "type": "move", "args": [ "results", "now_playing" ]}
-              ]
-            }
-          }
+          {{ include "flatmap_remove_fields.tpl" }}
         },
         {
           "url_pattern": "/3/movie/top_rated",
-          "extra_config": {
-            "github.com/devopsfaith/krakend/proxy": {
-              "flatmap_filter": [
-                { "type": "del", "args": [ "results.*.adult" ]},
-                { "type": "del", "args": [ "results.*.backdrop_path" ]},
-                { "type": "del", "args": [ "results.*.genre_ids" ]},
-                { "type": "del", "args": [ "results.*.original_language" ]},
-                { "type": "del", "args": [ "results.*.original_title" ]},
-                { "type": "del", "args": [ "results.*.overview" ]},
-                { "type": "del", "args": [ "results.*.popularity" ]},
-                { "type": "del", "args": [ "results.*.poster_path" ]},
-                { "type": "del", "args": [ "results.*.release_date" ]},
-                { "type": "del", "args": [ "results.*.video" ]},
-                { "type": "del", "args": [ "results.*.vote_average" ]},
-                { "type": "del", "args": [ "results.*.vote_count" ]},
-
-                { "type": "del", "args": [ "page" ]},
-                { "type": "del", "args": [ "total_pages" ]},
-                { "type": "del", "args": [ "total_results" ]},
-                { "type": "del", "args": [ "dates" ]},
-
-                { "type": "move", "args": [ "results", "top_rated" ]}
-              ]
-            }
-          }
+          {{ include "flatmap_remove_fields.tpl" }}
         }
       ]
     }
